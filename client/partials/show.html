@@ -16,7 +16,7 @@
 			<div ng-repeat='y in x'>
 				<div ng-repeat='z in y'>
 					{{ z.user_name }}: {{ z.answer }} - {{ z.support_detail}} 
-					<a ng-click='updateThisAnswerLike(z._id)'>Like</a>
+					<a ng-click='updateThisAnswerLike(z._id)'>Like</a> - {{ z.likes }}
 				</div>
 			</div>
 

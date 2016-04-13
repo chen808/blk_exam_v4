@@ -90,7 +90,7 @@ module.exports = (function(){
 
 
 		update_like: function(req, res){
-			Answer.findOneAndUpdate( {_id:req.body.questionID}, {$inc:{likes: 1}}, function(err, Answer){
+			Answer.findOneAndUpdate( {_id:req.params.id}, {$inc:{likes: 1}}, function(err, Answer){
 	 				if(err){
 	 					console.log('error updating like count');
 	 				}
