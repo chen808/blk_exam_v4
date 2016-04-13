@@ -1,0 +1,26 @@
+<style type="text/css">
+	#showContainer{
+		padding: 20px;
+	}
+</style>
+
+
+<div ng-controller="ShowController" id='showContainer'>
+	<!-- Dashboard -->
+	<a href="#/dashboard"><input type="submit" value="Home"></a> 
+
+		<h1>{{ thisQuestion.question }}</h1>
+		<h4>{{ thisQuestion.detail }}</h4>
+
+		<div ng-repeat='x in allQuestionAnswer'>
+			<div ng-repeat='y in x'>
+				<div ng-repeat='z in y'>
+					{{ z.user_name }}: {{ z.answer }} - {{ z.support_detail}} 
+					<a ng-click='updateThisAnswerLike(z._id)'>Like</a>
+				</div>
+			</div>
+
+		</div>
+
+
+</div>

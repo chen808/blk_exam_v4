@@ -51,6 +51,16 @@ module.exports = (function(){
 			Question.findOne({_id:req.body.questionID}, function(err, question){
 				var answer = new Answer({user_name:req.body.user_name, answer:req.body.answer, support_detail:req.body.support_detail});
 
+				// increment the answer count
+				Question.findOneAndUpdate( {_id:req.body.questionID}, {$inc:{answer_count: 1}}, function(err, Question){
+	 				if(err){
+	 					console.log('error updating post count');
+	 				}
+	 				else{
+	 					console.log('successfully updated post count');
+	 				}
+	 			})
+
 				answer._question = question._id;
 
 				question.answers.push(answer);
@@ -68,6 +78,38 @@ module.exports = (function(){
 			})
 			
 		},
+
+		get_all: function(req, res){
+			Question.findOne({_id:req.params.id})
+				.populate('answers')
+				.exec(function(err, answer){
+					res.json('answer', {answer});
+				})
+
+		},
+
+
+		update_like: function(req, res){
+			Answer.findOneAndUpdate( {_id:req.body.questionID}, {$inc:{likes: 1}}, function(err, Answer){
+	 				if(err){
+	 					console.log('error updating like count');
+	 				}
+	 				else{
+	 					console.log('successfully updated like count');
+	 				}
+	 			})
+		}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

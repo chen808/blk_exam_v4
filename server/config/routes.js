@@ -16,6 +16,10 @@ module.exports = function(app){
 		question.get_one_question(req, res, req.params.id);
 	})
 
+	app.get('/getAll/:id', function(req, res){
+		question.get_all(req, res, req.params.id);
+	})
+
 
 	// POSTS =================================
 	app.post('/newQuestion', function(req, res){
@@ -24,6 +28,11 @@ module.exports = function(app){
 
 	app.post('/answer_this', function(req, res){
 		question.answer_to_question(req, res);
+	})
+
+	app.get('/updateLike/:id', function(req, res){
+		console.log(req.params.id);
+		question.update_like(req, res, req.params.id);
 	})
 
 

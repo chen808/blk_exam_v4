@@ -44,6 +44,9 @@
 			        .when('/this_question/:id',{
 			            templateUrl: 'partials/this_question.html'
 			        })
+			        .when('/show/:id',{
+			            templateUrl: 'partials/show.html'
+			        })
 			        .otherwise({
 			          redirectTo: '/'
 			        });
@@ -100,6 +103,19 @@
 				})
 			}
 
+			factory.getQuestionAnswer = function(questionID, callback){
+				$http.get('/getAll/' + questionID).success(function(output){
+					callback(output);
+				})
+			}
+
+			factory.updateLike = function(answerID, callback){
+				console.log(answerID);
+				$http.get('/updateLike/' + answerID).success(function(output){
+					callback(output);
+				})
+			}
+
 
 
 
@@ -123,6 +139,7 @@
 				$scope.all_questions = data;
 			})
 
+
 			// New User
 			$scope.newUser = function(){
 				console.log($scope.new_User);
@@ -140,6 +157,16 @@
 
 				$location.path(location);
 			}
+
+			// Show question and answers
+			$scope.show_Question = function(id){
+				var location = '/show/' + id
+
+				$location.path(location);
+			}
+
+			
+
 
 
 
@@ -198,9 +225,24 @@
 
 
 		// CONTROLLER =======================================
-		myApp.controller('AnswerController', function($scope, UserFactory, $location, $routeParams){
+		myApp.controller('ShowController', function($scope, UserFactory, $location, $routeParams){
 
+			questionID = $routeParams.id
+
+			UserFactory.getThisQuestion(questionID, function(data){
+				$scope.thisQuestion = data;
+			})
 			
+			UserFactory.getQuestionAnswer(questionID, function(data){
+				console.log(data);
+				$scope.allQuestionAnswer = data;
+			})
+
+			$scope.updateThisAnswerLike = function(answerID){
+				UserFactory.updateLike(answerID, function(data){
+
+				})
+			}
 
 
 		});

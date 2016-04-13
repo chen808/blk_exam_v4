@@ -27,9 +27,8 @@
 		<tr ng-repeat="x in all_questions"> 
 
 			<td>{{ x.question }}</td>
-			<td></td>
-			<td><a href="/show">Show</a> | <a ng-click='get_this_Question(x._id)'>Answer</a> </td>
-
+			<td>{{ x.answer_count }}</td>
+			<td><a ng-click='show_Question(x._id)'>Show</a> | <a ng-click='get_this_Question(x._id)'>Answer</a> </td>
 
 		</tr>
 
