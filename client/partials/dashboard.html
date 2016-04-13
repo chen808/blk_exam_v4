@@ -6,9 +6,35 @@
 
 
 <div ng-controller="SignInController" id='dashboardContainer'>
+	<!-- Log out -->
 	<a href="#/"><input type="submit" value="Log Out"></a> 
+
+	<!-- Link to Ask a Question -->
+	<a href="#/question"><input type="submit" value="Add a Question"></a> 
+
 	<h1>Welcome {{ this_user[0] }}</h1>
 	<!-- <input type='hidden' ng-value='newbucket.user_name=this_user[0]'> -->
+
+
+	<!-- Display the Topics -->
+	<table class="table">
+		<tr>
+			<th>Question</th>
+			<th>Answers</th>
+			<th>Action</th>
+		</tr>
+
+		<tr ng-repeat="x in all_questions"> 
+
+			<td>{{ x.question }}</td>
+			<td></td>
+			<td><a href="/show">Show</a> | <a ng-click='get_this_Question(x._id)'>Answer</a> </td>
+
+
+		</tr>
+
+	</table>
+
 
 
 

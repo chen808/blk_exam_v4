@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var fs = require('fs');
 
 // connecting to database 
-mongoose.connect('mongodb://localhost/MeanDB'); // <------- this is the table name!
+mongoose.connect('mongodb://localhost/BlkBeltV3'); // <------- this is the table name!
 
 
 // specify the path to all the models

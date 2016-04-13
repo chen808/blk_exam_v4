@@ -38,10 +38,20 @@
 			        .when('/dashboard',{
 			            templateUrl: 'partials/dashboard.html'
 			        })
+			        .when('/question',{
+			            templateUrl: 'partials/question.html'
+			        })
+			        .when('/this_question/:id',{
+			            templateUrl: 'partials/this_question.html'
+			        })
 			        .otherwise({
 			          redirectTo: '/'
 			        });
 			});
+
+
+
+
 
 		// FACTORY ==========================================
 		myApp.factory('UserFactory', function($http){
@@ -61,6 +71,35 @@
 				callback(stashUser);
 			}
 
+			// creating new question
+			factory.createQuestion = function(question, callback){
+				console.log(question);
+				$http.post('/newQuestion', question).success(function(output){
+					callback();
+				})
+			}
+
+			// getting all questions
+			factory.get_all_questions = function(callback){
+				$http.get('/getAllQuestions').success(function(output){
+					callback(output);
+				})
+			}
+
+			// getting 1 question
+			factory.getThisQuestion = function(questionID, callback){
+				$http.get('/getQuestion/' + questionID).success(function(output){
+					callback(output);
+				})
+			}
+
+			// adding answer to question
+			factory.createAnswer = function(data, callback){
+				$http.post('/answer_this', data).success(function(output){
+					callback();
+				})
+			}
+
 
 
 
@@ -68,12 +107,20 @@
 			return factory;
 		});
 
+
+
+
 		// CONTROLLER =======================================
 		myApp.controller('SignInController', function($scope, UserFactory, $location){
 
 			// Get the current user name
 			UserFactory.get_current_user(function(data){
 				$scope.this_user = data;
+			})
+
+			// Get all the questions
+			UserFactory.get_all_questions(function(data){
+				$scope.all_questions = data;
 			})
 
 			// New User
@@ -86,10 +133,79 @@
 				UserFactory.stashUser(new_User, function(user){})
 			}
 
+			// Get a question
+			$scope.get_this_Question = function(id){
+
+				var location = '/this_question/' + id
+
+				$location.path(location);
+			}
 
 
 
 		});
+
+
+
+
+
+		// CONTROLLER =======================================
+		myApp.controller('QuestionController', function($scope, UserFactory, $location, $routeParams){
+
+			questionID = $routeParams.id
+
+			// get this question
+			UserFactory.getThisQuestion(questionID, function(data){
+				$scope.thisQuestion = data;
+			})
+
+
+			// Get the current user name
+			UserFactory.get_current_user(function(data){
+				$scope.this_user = data;
+			})
+
+			// Adding Question
+			$scope.addQuestion = function(){
+
+				UserFactory.createQuestion($scope.new_Question, function(){
+
+				})
+			}
+
+			// Adding Answer
+			$scope.addAnswer = function(){
+
+				UserFactory.createAnswer($scope.new_answer, function(data){
+
+				})
+			}
+
+
+
+
+
+		});
+
+
+
+
+
+
+
+
+
+
+
+		// CONTROLLER =======================================
+		myApp.controller('AnswerController', function($scope, UserFactory, $location, $routeParams){
+
+			
+
+
+		});
+
+
 
 	</script>
 
