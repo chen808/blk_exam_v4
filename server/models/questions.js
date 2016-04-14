@@ -9,6 +9,7 @@ var QuestionSchema = new mongoose.Schema({
 	question:String,
 	detail:String,
 	answer_count:Number,
+	created_at:{ type: Date, default: Date.now },
 
 	//creating association to Answer
 	answers: [{type: Schema.Types.ObjectId, ref:'Answer'}]

@@ -10,17 +10,24 @@
 	<a href="#/dashboard"><input type="submit" value="Home"></a> 
 
 		<h1>{{ thisQuestion.question }}</h1>
-		<h4>{{ thisQuestion.detail }}</h4>
+		<h4>{{ thisQuestion.detail }} | Question by: {{ thisQuestion.user_name }}</h4>
 
-		<div ng-repeat='x in allQuestionAnswer'>
+		<div ng-repeat=' x in allQuestionAnswer '>
 			<div ng-repeat='y in x'>
-				<div ng-repeat='z in y'>
-					{{ z.user_name }}: {{ z.answer }} - {{ z.support_detail}} 
-					<a ng-click='updateThisAnswerLike(z._id)'>Like</a> - {{ z.likes }}
+				<div ng-repeat='z in y | orderBy:"-likes" '>
+					{{ z.user_name }}: {{ z.answer }} - {{ z.support_detail}}
+
+					<a ng-click='updateThisAnswerLike(z._id)'>Likes - </a> {{ z.likes }}
+					<!-- <p ng-if='z.likes == null'>0<p>{{ z.likes }}</p></p> -->
 				</div>
 			</div>
-
 		</div>
+
+
+
+
+
+		
 
 
 </div>

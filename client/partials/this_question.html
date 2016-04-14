@@ -16,7 +16,7 @@
 	<a href="#/question"><input type="submit" value="Add a Question"></a> 
 
 
-	<h1>{{ thisQuestion.question }}</h1>
+	<h1>Answer this: {{ thisQuestion.question }}</h1>
 	<h4>{{ thisQuestion.detail }}</h4>
 
 	<form name="myForm">
@@ -38,6 +38,8 @@
 		<label>
 			<textarea rows="4" cols="30" name="supportingdetails" ng-model="new_answer.support_detail"></textarea>
 		</label>
+
+		<br>
 
 		<!-- Cancel -->
 		<a href="#/dashboard"><input type="submit" value="Cancel"></a>

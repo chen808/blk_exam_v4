@@ -16,7 +16,9 @@ module.exports = (function(){
 					console.log("Error adding question");
 				}
 				else{
-					console.log("Success adding question!");
+					//console.log("Success adding question!");
+					// returning success sign
+					return res.json({success:"Successfully added question!"});
 				}
 			})
 		},

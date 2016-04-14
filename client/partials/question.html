@@ -5,6 +5,9 @@
 	span{
 		color: red;
 	}
+	.blue{
+		color: blue;
+	}
 </style>
 
 
@@ -38,12 +41,16 @@
 			<textarea rows="4" cols="30" name="details" ng-model="new_Question.detail"></textarea>
 		</label>
 
+		<br>
+
 		<!-- Cancel -->
 		<a href="#/dashboard"><input type="submit" value="Cancel"></a>
 
 		<!-- Submit -->
-		<a href="#/dashboard"><input type="submit" value="Submit" ng-click="addQuestion()"></a>
+		<a href="#/question"><input type="submit" value="Submit" ng-click="addQuestion()"></a>
 
+		<!-- Display this message if successfully added question -->
+		<br><h4 class='blue'>{{ success_message.success }}</h4>
 
 	</form>
 

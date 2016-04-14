@@ -78,7 +78,8 @@
 			factory.createQuestion = function(question, callback){
 				console.log(question);
 				$http.post('/newQuestion', question).success(function(output){
-					callback();
+					// sending the success message back to controller
+					callback(output);
 				})
 			}
 
@@ -112,6 +113,7 @@
 			factory.updateLike = function(answerID, callback){
 				console.log(answerID);
 				$http.get('/updateLike/' + answerID).success(function(output){
+					console.log(output);
 					callback(output);
 				})
 			}
@@ -136,6 +138,7 @@
 
 			// Get all the questions
 			UserFactory.get_all_questions(function(data){
+				console.log(data);
 				$scope.all_questions = data;
 			})
 
@@ -195,8 +198,12 @@
 			// Adding Question
 			$scope.addQuestion = function(){
 
-				UserFactory.createQuestion($scope.new_Question, function(){
+				UserFactory.createQuestion($scope.new_Question, function(data){
+					// return a success message from back end
+					$scope.success_message = data;
 
+					// clear the form
+					$scope.new_Question = {};
 				})
 			}
 
@@ -208,18 +215,7 @@
 				})
 			}
 
-
-
-
-
 		});
-
-
-
-
-
-
-
 
 
 
@@ -234,13 +230,16 @@
 			})
 			
 			UserFactory.getQuestionAnswer(questionID, function(data){
-				console.log(data);
 				$scope.allQuestionAnswer = data;
 			})
 
 			$scope.updateThisAnswerLike = function(answerID){
-				UserFactory.updateLike(answerID, function(data){
-
+				UserFactory.updateLike(answerID, function(){
+					// console.log(data);
+					// $scope.allQuestionAnswer = data;
+				})
+				UserFactory.getQuestionAnswer(questionID, function(data){
+						$scope.allQuestionAnswer = data;
 				})
 			}
 

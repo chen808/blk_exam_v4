@@ -9,6 +9,7 @@ var AnswerSchema = new mongoose.Schema({
 	answer:String,
 	support_detail:String,
 	likes:Number,
+	created_at:{ type: Date, default: Date.now },
 
 	// belongs to Question
 	_question: {type: Schema.Types.ObjectId, ref:'Question' }

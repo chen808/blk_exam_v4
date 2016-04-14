@@ -7,7 +7,7 @@ var question = require('./../controllers/questions.js');
 
 module.exports = function(app){
 
-	// GETS ==================================
+	// GETS ====================================================
 	app.get('/getAllQuestions', function(req, res){
 		question.get_all_question(req, res);
 	})
@@ -21,7 +21,10 @@ module.exports = function(app){
 	})
 
 
-	// POSTS =================================
+	// POSTS ===================================================
+
+	// req: adds new question
+	// res: return the success message
 	app.post('/newQuestion', function(req, res){
 		question.new_Question(req, res);
 	})
