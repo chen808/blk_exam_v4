@@ -41,6 +41,9 @@
 			        .when('/create',{
 			            templateUrl: 'partials/create.html'
 			        })
+			        .when('/this_poll/:id',{
+			            templateUrl: 'partials/show.html'
+			        })
 			        .otherwise({
 			          redirectTo: '/'
 			        });
@@ -89,6 +92,41 @@
 			// delete this poll
 			factory.delete_poll = function(id, callback){
 				$http.get('/deletePoll/' + id).success(function(output){
+					callback(output);
+				})
+			}
+
+			// get this poll
+			factory.getThisPoll = function(id, callback){
+				$http.get('/getPoll/' + id).success(function(output){
+					callback(output);
+				})
+			}
+
+			// voting for option 1
+			factory.updateOpt1Count = function(id, callback){
+				$http.post('/updateOpt1_Count/' + id).success(function(output){
+					callback(output);
+				})
+			}
+
+			// voting for option 2
+			factory.updateOpt2Count = function(id, callback){
+				$http.post('/updateOpt2_Count/' + id).success(function(output){
+					callback(output);
+				})
+			}
+
+			// voting for option 3
+			factory.updateOpt3Count = function(id, callback){
+				$http.post('/updateOpt3_Count/' + id).success(function(output){
+					callback(output);
+				})
+			}
+
+			// voting for option 4
+			factory.updateOpt4Count = function(id, callback){
+				$http.post('/updateOpt4_Count/' + id).success(function(output){
 					callback(output);
 				})
 			}
@@ -155,6 +193,13 @@
 				})
 			}
 
+			// Route to get this poll
+			$scope.get_this_poll = function(id){
+				var location = '/this_poll/' + id;
+				$location.path(location);
+			}
+
+
 
 
 
@@ -210,6 +255,94 @@
 
 		})
 
+
+		// CONTROLLER Shhow =======================================
+		myApp.controller('ShowController', function($scope, UserFactory, $location, $routeParams){
+
+			pollID = $routeParams.id
+
+			UserFactory.getThisPoll(pollID, function(data){
+				$scope.thisPollInfo = data;
+			})
+
+			// go back to dashboard
+			$scope.gotopolls = function(){
+				var location = '/dashboard';
+				$location.path(location);
+			}
+
+			// Logout
+			$scope.logOut = function(){
+				UserFactory.deleteUser(function(data){});
+				var location = '/';
+				$location.path(location);
+			}
+
+			// voted for option 1
+			$scope.votedOption1 = function(id){
+				console.log(id);
+				UserFactory.updateOpt1Count(id, function(data){
+					console.log(data);
+				})
+
+				UserFactory.getThisPoll(pollID, function(data){
+					console.log(data);
+					$scope.thisPollInfo = data;
+				})
+			}
+
+
+			// voted for option 2
+			$scope.votedOption2 = function(id){
+				console.log(id);
+				UserFactory.updateOpt2Count(id, function(data){
+					console.log(data);
+				})
+
+				UserFactory.getThisPoll(pollID, function(data){
+					console.log(data);
+					$scope.thisPollInfo = data;
+				})
+			}
+
+
+			// voted for option 3
+			$scope.votedOption3 = function(id){
+				console.log(id);
+				UserFactory.updateOpt3Count(id, function(data){
+					console.log(data);
+				})
+
+				UserFactory.getThisPoll(pollID, function(data){
+					console.log(data);
+					$scope.thisPollInfo = data;
+				})
+			}
+
+
+			// voted for option 4
+			$scope.votedOption4 = function(id){
+				console.log(id);
+				UserFactory.updateOpt4Count(id, function(data){
+					console.log(data);
+				})
+
+				UserFactory.getThisPoll(pollID, function(data){
+					console.log(data);
+					$scope.thisPollInfo = data;
+				})
+			}
+
+
+
+
+
+
+
+
+
+
+		})
 
 
 

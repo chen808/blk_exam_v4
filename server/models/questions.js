@@ -11,6 +11,10 @@ var QuestionSchema = new mongoose.Schema({
 	option_2:String,
 	option_3:String,
 	option_4:String,
+	option_1_count:Number,
+	option_2_count:Number,
+	option_3_count:Number,
+	option_4_count:Number,
 	created_at:{ type: Date, default: Date.now },
 
 	//creating association to Answer

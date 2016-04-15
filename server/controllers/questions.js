@@ -50,7 +50,62 @@ module.exports = (function(){
 					console.log('Successfully deleted data');
 				}
 			})
-		}
+		},
+
+		getThisPoll: function(req, res){
+			Question.findOne({_id:req.params.id}, function(err, results){
+				if(err){
+					console.log('error getting data');
+				}
+				else{
+					res.json(results);
+				}
+			})
+		},
+
+		update_Opt1_count: function(req, res){
+			Question.findOneAndUpdate( {_id:req.params.id}, {$inc:{option_1_count: 1}}, function(err, Answer){
+				if(err){
+					console.log('error updating count');
+				}
+				else{
+					console.log('Successfully updated count');
+				}
+			})
+		},
+
+		update_Opt2_count: function(req, res){
+			Question.findOneAndUpdate( {_id:req.params.id}, {$inc:{option_2_count: 1}}, function(err, Answer){
+				if(err){
+					console.log('error updating count');
+				}
+				else{
+					console.log('Successfully updated count');
+				}
+			})
+		},
+
+		update_Opt3_count: function(req, res){
+			Question.findOneAndUpdate( {_id:req.params.id}, {$inc:{option_3_count: 1}}, function(err, Answer){
+				if(err){
+					console.log('error updating count');
+				}
+				else{
+					console.log('Successfully updated count');
+				}
+			})
+		},
+
+		update_Opt4_count: function(req, res){
+			Question.findOneAndUpdate( {_id:req.params.id}, {$inc:{option_4_count: 1}}, function(err, Answer){
+				if(err){
+					console.log('error updating count');
+				}
+				else{
+					console.log('Successfully updated count');
+				}
+			})
+		},
 
 
 

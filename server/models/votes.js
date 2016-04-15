@@ -10,6 +10,7 @@ var VoteSchema = new mongoose.Schema({
 	option_3_count:Number,
 	option_4_count:Number,
 	
+	
 
 	// belongs to Question
 	_question: {type: Schema.Types.ObjectId, ref:'Question' }

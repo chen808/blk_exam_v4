@@ -1,0 +1,50 @@
+<style type="text/css">
+	#showContainer{
+		padding: 20px;
+	}
+</style>
+
+
+<div ng-controller="ShowController" id='showContainer'>
+	<!-- Log out -->
+	<input type="submit" value="Log Out" ng-click="logOut()">
+
+	<!-- Create a new poll -->
+	<input type="submit" value="Go to Polls" ng-click="gotopolls()">
+
+
+	<table class='table'>
+		<tr>
+			<th>Option</th>
+			<th>Current Count of Votes</th>
+			<th>Action</th>
+		</tr>
+
+		<tr>
+			<td>{{ thisPollInfo.option_1 }}</td>
+			<td><span ng-if='thisPollInfo.option_1_count == null'>0</span>{{ thisPollInfo.option_1_count }}</td>
+			<td><input type="submit" value="Vote" ng-click='votedOption1(thisPollInfo._id)'></td>
+		</tr>
+
+		<tr>
+			<td>{{ thisPollInfo.option_2 }}</td>
+			<td><span ng-if='thisPollInfo.option_2_count == null'>0</span>{{ thisPollInfo.option_2_count }}</td>
+			<td><input type="submit" value="Vote" ng-click='votedOption2(thisPollInfo._id)'></td>
+		</tr>
+
+		<tr>
+			<td>{{ thisPollInfo.option_3 }}</td>
+			<td><span ng-if='thisPollInfo.option_3_count == null'>0</span>{{ thisPollInfo.option_3_count }}</td>
+			<td><input type="submit" value="Vote" ng-click='votedOption3(thisPollInfo._id)'></td>
+		</tr>
+
+		<tr>
+			<td>{{ thisPollInfo.option_4 }}</td>
+			<td><span ng-if='thisPollInfo.option_4_count == null'>0</span>{{ thisPollInfo.option_4_count }}</td>
+			<td><input type="submit" value="Vote" ng-click='votedOption4(thisPollInfo._id)'></td>
+		</tr>
+	</table>
+
+
+
+</div>
