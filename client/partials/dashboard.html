@@ -9,14 +9,34 @@
 	<!-- Log out -->
 	<input type="submit" value="Log Out" ng-click="logOut()">
 
-	<!-- Link to Ask a Question -->
-	<a href="#/question"><input type="submit" value="Add a Question"></a> 
+	<!-- Create a new poll -->
+	<input type="submit" value="Create a new poll" ng-click="createPoll()">
 
 	<h1>Welcome {{ this_user[0] }}</h1>
 	<!-- <input type='hidden' ng-value='newbucket.user_name=this_user[0]'> -->
 
+	<h4>Current Polls:</h4>
 
-test
+	<!-- Display the survey questions -->
+	<table class='table'>
+		<tr>
+			<th>Name</th>
+			<th>Survey Question</th>
+			<th>Date Posted</th>
+			<th>Action</th>
+		</tr>
+
+
+		<tr ng-repeat = 'x in allPoll'>
+			<td>{{ x.user_name }}</td>
+			<td>{{ x.question }}</td>
+			<td>{{ x.created_at | date:'MM/dd/yyyy' }}</td>
+			<td ng-if="this_user[0] == x.user_name"> <input type='submit' value="Delete" ng-click="deletePoll(x._id)"> </td>
+		</tr>
+
+	</table>
+
+
 
 
 

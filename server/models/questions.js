@@ -7,12 +7,14 @@ var Schema = mongoose.Schema;
 var QuestionSchema = new mongoose.Schema({
 	user_name:String,
 	question:String,
-	detail:String,
-	answer_count:Number,
+	option_1:String,
+	option_2:String,
+	option_3:String,
+	option_4:String,
 	created_at:{ type: Date, default: Date.now },
 
 	//creating association to Answer
-	answers: [{type: Schema.Types.ObjectId, ref:'Answer'}]
+	votes: [{type: Schema.Types.ObjectId, ref:'Vote'}]
 
 }); // end of TweetSchema
 

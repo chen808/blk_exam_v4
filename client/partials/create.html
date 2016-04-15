@@ -1,0 +1,61 @@
+<style type="text/css">
+	#createContainer{
+		padding: 20px;
+	}
+	span{
+		color: red;
+	}
+</style>
+
+
+<div ng-controller="CreateController" id='createContainer'>
+	<!-- Log out -->
+	<input type="submit" value="Log Out" ng-click="logOut()">
+
+	<!-- Cancel Button -->
+	<input type="submit" value="Cancel" ng-click="cancel()">
+
+	<h1>Hello {{ this_user[0] }}, please create your poll</h1>
+	<input type='hidden' ng-value='new_poll.user_name=this_user[0]'>
+
+	<h4>Put the questions and options here:</h4>
+
+	<form name="myForm">
+		<h4>Question:  <input ng-model='new_poll.question' name='question' ng-minlength="8"></h4>
+		<h4>Option 1:  <input ng-model='new_poll.option1' name='option1' ng-minlength="3"></h4>
+		<h4>Option 2:  <input ng-model='new_poll.option2' name='option2' ng-minlength="3"></h4>
+		<h4>Option 3:  <input ng-model='new_poll.option3' name='option3' ng-minlength="3"></h4>
+		<h4>Option 4:  <input ng-model='new_poll.option4' name='option4' ng-minlength="3"></h4>
+
+		<!-- Alert for question -->
+		<div role="alert">
+			<span class="error" ng-show="myForm.question.$error.minlength">Question Too short, needs to be more then 8 characters!</span>
+		</div>
+
+		<div role="alert">
+			<span class="error" ng-show="myForm.option1.$error.minlength">Option 1 Too short, needs to be more then 3 characters!</span>
+		</div>
+
+		<div role="alert">
+			<span class="error" ng-show="myForm.option2.$error.minlength">Option 2 Too short, needs to be more then 3 characters!</span>
+		</div>
+
+		<div role="alert">
+			<span class="error" ng-show="myForm.option3.$error.minlength">Option 3 Too short, needs to be more then 3 characters!</span>
+		</div>
+
+		<div role="alert">
+			<span class="error" ng-show="myForm.option4.$error.minlength">Option 4 Too short, needs to be more then 3 characters!</span>
+		</div>
+
+		<!-- Submit new poll -->
+		<input type='submit' value='Create Poll' ng-click='newPoll()'>
+
+		<!-- Display error message if left black inputs -->
+		<span>{{ errorMessage.error }}<span>
+
+	</form>
+
+
+
+</div>

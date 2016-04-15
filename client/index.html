@@ -38,6 +38,9 @@
 			        .when('/dashboard',{
 			            templateUrl: 'partials/dashboard.html'
 			        })
+			        .when('/create',{
+			            templateUrl: 'partials/create.html'
+			        })
 			        .otherwise({
 			          redirectTo: '/'
 			        });
@@ -69,6 +72,28 @@
 			}
 
 
+			// creating poll
+			factory.create_poll = function(poll_data, callback){
+				$http.post('/newPoll', poll_data).success(function(output){
+					callback(output);
+				})
+			}
+
+			// getting all poll
+			factory.get_all_poll = function(callback){
+				$http.get('/getAllPoll').success(function(output){
+					callback(output);
+				})
+			}
+
+			// delete this poll
+			factory.delete_poll = function(id, callback){
+				$http.get('/deletePoll/' + id).success(function(output){
+					callback(output);
+				})
+			}
+
+
 
 
 
@@ -90,6 +115,12 @@
 				$scope.this_user = data;
 			})
 
+			// Get all polls
+			UserFactory.get_all_poll(function(data){
+				console.log(data);
+				$scope.allPoll = data;
+			})
+
 			// New User
 			$scope.newUser = function(){
 				// store the newly signed user to variable
@@ -105,6 +136,25 @@
 				$location.path(location);
 			}
 
+			// Route to create new poll
+			$scope.createPoll = function(){
+				var location = '/create';
+				$location.path(location);
+			}
+
+			// Delete a Poll
+			$scope.deletePoll = function(id){
+				console.log('batman');
+				console.log(id);
+				UserFactory.delete_poll(id, function(){});
+
+				// Get all polls
+				UserFactory.get_all_poll(function(data){
+					console.log(data);
+					$scope.allPoll = data;
+				})
+			}
+
 
 
 
@@ -113,6 +163,52 @@
 
 
 		});
+
+		// CONTROLLER Create =======================================
+		myApp.controller('CreateController', function($scope, UserFactory, $location){
+
+			// Get the current user name
+			UserFactory.get_current_user(function(data){
+				$scope.this_user = data;
+			})
+
+			// Cancel
+			$scope.cancel = function(){
+				var location = '/dashboard';
+				$location.path(location);
+			}
+
+			// Logout
+			$scope.logOut = function(){
+				UserFactory.deleteUser(function(data){});
+				var location = '/';
+				$location.path(location);
+			}
+
+			$scope.newPoll = function(){
+				// send the poll information to factory
+				UserFactory.create_poll($scope.new_poll, function(data){
+					console.log(data);
+
+
+					if (data != null){
+						$scope.errorMessage = data;
+						var location = '/create';
+						$location.path(location);
+						//clear form
+						$scope.new_poll = {}
+					}
+					// NEED TO FIX THIS!!!!
+					if(data == null){
+						var location = '/dashboard';
+						$location.path(location);
+					}
+				})
+			}
+
+
+
+		})
 
 
 
