@@ -24,7 +24,7 @@ module.exports = (function(){
 						console.log("Error adding new poll");
 					}
 					else{
-						console.log("Successfully created poll!");
+						return res.json({error: "Your poll was successfully saved!"});
 					}
 				})
 			}

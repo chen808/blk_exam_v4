@@ -19,6 +19,7 @@
 
 	<!-- Display the survey questions -->
 	<table class='table'>
+		<h6>Search list by name <input type='text' ng-model='filter_name' placeholder='Search by name'></h6>
 		<tr>
 			<th>Name</th>
 			<th>Survey Question</th>
@@ -27,7 +28,7 @@
 		</tr>
 
 
-		<tr ng-repeat = 'x in allPoll'>
+		<tr ng-repeat = 'x in allPoll | filter:filter_name'>
 			<td>{{ x.user_name }}</td>
 			<td><a ng-click='get_this_poll(x._id)'>{{ x.question }}</a></td>
 			<td>{{ x.created_at | date:'MM/dd/yyyy' }}</td>

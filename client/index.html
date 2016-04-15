@@ -234,21 +234,32 @@
 				// send the poll information to factory
 				UserFactory.create_poll($scope.new_poll, function(data){
 					console.log(data);
+					console.log(data.error);
 
-
-					if (data != null){
-						$scope.errorMessage = data;
-						var location = '/create';
-						$location.path(location);
+					// if data contains something ...
+					if (data.error ==  "Did not save, please fill all empty spaces"){
+						$scope.errorMessage = data;	
+						// $scope.errorMessage = data;
 						//clear form
 						$scope.new_poll = {}
 					}
-					// NEED TO FIX THIS!!!!
-					if(data == null){
+
+					if (data.error ==  "Your poll was successfully saved!"){
 						var location = '/dashboard';
-						$location.path(location);
+						$location.path(location);	
 					}
+
+
+
 				})
+
+				$scope.errorMessage = data;	
+
+				$scope.new_poll = {};	
+					var location = '/dashboard';
+					$location.path(location);	
+
+					
 			}
 
 
