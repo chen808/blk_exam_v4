@@ -7,7 +7,7 @@
 
 <div ng-controller="SignInController" id='dashboardContainer'>
 	<!-- Log out -->
-	<a href="#/"><input type="submit" value="Log Out"></a> 
+	<input type="submit" value="Log Out" ng-click="logOut()">
 
 	<!-- Link to Ask a Question -->
 	<a href="#/question"><input type="submit" value="Add a Question"></a> 
@@ -15,27 +15,6 @@
 	<h1>Welcome {{ this_user[0] }}</h1>
 	<!-- <input type='hidden' ng-value='newbucket.user_name=this_user[0]'> -->
 
-
-	<!-- Display the Topics -->
-	<table class="table">
-		<h6>Search list by name <input type='text' ng-model='filter_name' placeholder='Search by name'></h6>
-		<tr>
-			<th>Question</th>
-			<th>Answers</th>
-			<th>Created At</th>
-			<th>Action</th>
-		</tr>
-		<!-- Reverse the order (-_id) so newly created question is on top -->
-		<tr ng-repeat=" x in all_questions | filter:filter_name | orderBy:'-_id' "> 
-
-			<td>{{ x.question }}</td>
-			<td>{{ x.answer_count }}</td>
-			<td>{{ x.created_at | date:'MM/dd/yyyy' }}</td>
-			<td><a ng-click='show_Question(x._id)'>Show</a> | <a ng-click='get_this_Question(x._id)'>Answer</a> </td>
-
-		</tr>
-
-	</table>
 
 
 
